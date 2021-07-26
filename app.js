@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     //rotate the airplanes
     function rotate(){
         if (isHorizontal){
+
+            document.getElementById("airplane-container-0").style.flexDirection="row";
+
             firstAirplaneHead.classList.replace("head", "head-rotated")
             secondAirplaneHead.classList.replace("head", "head-rotated")
             thirdAirplaneHead.classList.replace("head", "head-rotated")
@@ -57,14 +60,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
             secondAirplaneWings.classList.replace("wings", "wings-rotated")
             thirdAirplaneWings.classList.replace("wings", "wings-rotated")
 
-            firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+            /*firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
             secondAirplaneCabins.classList.replace("cabins", "cabins-rotated")
             thirdAirplaneCabins.classList.replace("cabins", "cabins-rotated")
 
             firstAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
             secondAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
             thirdAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-          
+            */
             isHorizontal=false 
         }
         else{

@@ -27,7 +27,7 @@
 
 .grid-display {
     width: 720px;
-    height: 200px;
+    height: 240px;
     margin: 20px;
     background-color: lightblue;
     display: flex;
@@ -35,16 +35,17 @@
 
 .first-airplane-container{
     width: 200px;
-    height: 160px;
+    height: 200px;
     margin: 20px;
     display: flex;
     flex-direction: column;
     background-color:transparent;
 }
 
+
 .second-airplane-container{
     width: 200px;
-    height: 160px;
+    height: 200px;
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -53,16 +54,11 @@
 
 .third-airplane-container{
     width: 200px;
-    height: 160px;
+    height: 200px;
     margin: 20px;
     display: flex;
     flex-direction: column;
     background-color: transparent;
-}
-
-.head div{
-    width: 40px;
-    height: 40px;
 }
 
 .head{
@@ -76,12 +72,9 @@
 .head-rotated{
     width: 40px;
     height: 40px;
+    margin-top: 80px;
+    margin-bottom: 80px;
     background-color: black;
-}
-
-.wings div{
-    width: 40px;
-    height: 40px;
 }
 
 .wings{
@@ -92,17 +85,13 @@
 }
 
 .wings-rotated{
-    width: 200px;
-    height: 40px;
+    width: 40px;
+    height: 200px;
     display:flex;
+    flex-direction: column;
     background-color: black;
 }
-
-.cabins div{
-    width: 40px;
-    height: 40px;
-}
-
+/*
 .cabins{
     width: 40px;
     height: 40px;
@@ -119,11 +108,6 @@
     background: black;
 }
 
-.tail-plane div{
-    width: 40px;
-    height: 40px;
-}
-
 .tail-plane{
     margin-left:40px;
     margin-right:40px;
@@ -134,14 +118,19 @@
 }
 
 .tail-plane-rotated{
-    margin-left:40px;
-    margin-right:40px;
+    margin-left:20px;
+    margin-right:20px;
     width:120px;
     height: 40px;
     display:flex;
     background-color: black;
 }
+*/
 
+.block div{
+    width: 40px;
+    height: 40px;
+}
 
 
 
