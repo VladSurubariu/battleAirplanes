@@ -1,0 +1,110 @@
+.container {
+    display: flex;
+}
+
+.grid-user {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightblue;
+    margin: 20px;
+}
+
+.grid div {
+    width: 40px;
+    height: 40px;
+}
+
+.grid-computer {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightslategray;
+    margin: 20px;
+}
+
+.grid-display {
+    width: 720px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0);;
+    display: flex;
+}
+
+.first-airplane-container{
+    width: 200px;
+    height: 160px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color:rgba(255, 255, 255, 0);;
+}
+
+.second-airplane-container{
+    width: 200px;
+    height: 160px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0);;
+}
+
+.third-airplane-container{
+    width: 200px;
+    height: 160px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0);;
+}
+
+.head{
+    width: 40px;
+    height: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.wings{
+    width: 200px;
+    height: 40px;
+    display: flex;
+}
+
+.cabins{
+    width: 40px;
+    height: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.tail-plane{
+    margin-left:40px;
+    margin-right:40px;
+    width:120px;
+    height: 40px;
+    display:flex;
+}
+
+.airplane div{
+    width: 40px;
+    height: 40px;
+}
+
+.first-airplane{
+    background-color: blueviolet;
+}
+
+.second-airplane{
+    background-color: blueviolet;
+}
+
+.third-airplane{
+    background-color: blueviolet;
+}
+
+
+
+
+
