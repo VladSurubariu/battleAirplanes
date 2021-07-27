@@ -1,10 +1,6 @@
-.container {
+.main-container {
     display: flex;
-}
-
-.grid div {
-    width: 40px;
-    height: 40px;
+    margin:20px;
 }
 
 .grid-user {
@@ -12,31 +8,56 @@
     height: 400px;
     display: flex;
     flex-wrap: wrap;
+    position: absolute;
     background-color: lightblue;
-    margin: 20px;
-}
-
-.grid-computer {
-    width: 400px;
-    height: 400px;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: lightslategray;
-    margin: 20px;
+    top:60px;
+    left:68px;    
 }
 
 .grid-display {
     width: 720px;
     height: 240px;
     margin: 20px;
-    background-color: transparent;
+    position: absolute;
+    top: 560px;
+    background-color: lightblue;
     display: flex;
+    flex-direction: row;
+}
+
+.empty-space{
+    width: 40px;
+    height:40px;
+    background-color: transparent;
+}
+
+.numbers-row{
+    position: absolute;
+    width: 40px;
+    height: 400px;
+    top: 60px;
+    background-color: transparent;
+    word-spacing: 30px;
+    font-size:35px;
+    text-align: center;
+}
+
+.letters-row{
+    width: 400px;
+    height: 40px;
+    background-color: transparent;
+    font-size:35px;
+    word-spacing: 10px;
+}
+
+.hidden-info{
+    position: absolute;
+    top: 480px;
 }
 
 .first-airplane-container{
     width: 200px;
-    height: 200px;
-    margin: 20px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     background-color:transparent;
@@ -44,8 +65,7 @@
 
 .second-airplane-container{
     width: 200px;
-    height: 200px;
-    margin: 20px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     background-color: transparent;
@@ -53,8 +73,7 @@
 
 .third-airplane-container{
     width: 200px;
-    height: 200px;
-    margin: 20px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     background-color: transparent;

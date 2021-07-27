@@ -9,9 +9,11 @@
     <script src="app.js" charset="utf-8"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="grid grid-user"></div>
-        <div class="grid grid-computer"></div>
+    <div class="main-container">
+        <div class="empty-space"></div>
+        <div class="numbers-row">1 2 3 4 5 6 7 8 9 10</div>
+        <div class="letters-row">A B C D E F G H I J </div>
+        <div class="grid grid-user container"></div>
     </div>
 
     <div class="hidden-info">
@@ -22,7 +24,7 @@
     </div>
 
     <div class="grid-display">
-        <div class="airplane first-airplane-container" id="airplane-container-0" draggable="true">
+        <div class="airplane first-airplane-container draggable canRotate" id="airplane-container-0" draggable="true">
             <div class="first-airplane-0 head block">
                 <div></div>
             </div>
@@ -42,7 +44,7 @@
                 <div></div>
             </div>
         </div>
-        <div class="airplane second-airplane-container" id="airplane-container-1" draggable="true">
+        <div class="airplane second-airplane-container draggable canRotate" id="airplane-container-1" draggable="true">
             <div class="second-airplane-0 head block">
                 <div></div>
             </div>
@@ -62,7 +64,7 @@
                 <div></div>
             </div>
         </div>
-        <div class="airplane third-airplane-container" id="airplane-container-2" draggable="true">
+        <div class="airplane third-airplane-container draggable canRotate" id="airplane-container-2" draggable="true">
             <div class="third-airplane-0 head block">
                 <div></div>
             </div>

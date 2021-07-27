@@ -36,61 +36,87 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var rotationType=1;
 
     //Create the boards
-    function createBoard(grid, squares){
+    /*function createBoard(grid, squares){
         for(let i=0; i<width*width; i++){
             const square=document.createElement('div')
             square.dataset.id=i
             grid.appendChild(square)
             squares.push(square)
         }
-    }
+    }*/
 
     function changeFromBasicToRotated(){
-        firstAirplaneHead.classList.replace("head", "head-rotated")
-        secondAirplaneHead.classList.replace("head", "head-rotated")
-        thirdAirplaneHead.classList.replace("head", "head-rotated")
+        if(document.querySelector('#airplane-container-0')!=null){
+            document.getElementById("airplane-container-0").style.width="160px";
+            document.getElementById("airplane-container-0").style.height="200px";
 
-        firstAirplaneWings.classList.replace("wings", "wings-rotated")
-        secondAirplaneWings.classList.replace("wings", "wings-rotated")
-        thirdAirplaneWings.classList.replace("wings", "wings-rotated")
+            firstAirplaneHead.classList.replace("head", "head-rotated")
+            firstAirplaneWings.classList.replace("wings", "wings-rotated")
+            firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+            firstAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+        }
+        if(document.querySelector('#airplane-container-1')!=null){
+            document.getElementById("airplane-container-1").style.width="160px";
+            document.getElementById("airplane-container-1").style.height="200px";
 
-        firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-        secondAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-        thirdAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-            
-        firstAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-        secondAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-        thirdAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+            secondAirplaneHead.classList.replace("head", "head-rotated")
+            secondAirplaneWings.classList.replace("wings", "wings-rotated")
+            secondAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+            secondAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+        }
+        if(document.querySelector('#airplane-container-2')!=null){
+            document.getElementById("airplane-container-2").style.width="160px";
+            document.getElementById("airplane-container-2").style.height="200px";
+
+            thirdAirplaneHead.classList.replace("head", "head-rotated")
+            thirdAirplaneWings.classList.replace("wings", "wings-rotated")
+            thirdAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+            thirdAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+        }
     }
 
     function changeFromRotatedToBasic(){
-        firstAirplaneHead.classList.replace("head-rotated", "head")
-        secondAirplaneHead.classList.replace("head-rotated", "head")
-        thirdAirplaneHead.classList.replace("head-rotated", "head")
+        if(document.querySelector('#airplane-container-0')!=null){
+            document.getElementById("airplane-container-0").style.width="200px";
+            document.getElementById("airplane-container-0").style.height="160px";
 
-        firstAirplaneWings.classList.replace("wings-rotated", "wings")
-        secondAirplaneWings.classList.replace("wings-rotated", "wings")
-        thirdAirplaneWings.classList.replace("wings-rotated", "wings")
+            firstAirplaneHead.classList.replace("head-rotated", "head")
+            firstAirplaneWings.classList.replace("wings-rotated", "wings")
+            firstAirplaneCabins.classList.replace("cabins-rotated", "cabins")
+            firstAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+        }
+        if(document.querySelector('#airplane-container-1')!=null){
+            document.getElementById("airplane-container-1").style.width="200px";
+            document.getElementById("airplane-container-1").style.height="160px";
 
-        firstAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-        secondAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-        thirdAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-        
-        firstAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-        secondAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-        thirdAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+            secondAirplaneHead.classList.replace("head-rotated", "head")
+            secondAirplaneWings.classList.replace("wings-rotated", "wings")
+            secondAirplaneCabins.classList.replace("cabins-rotated", "cabins")
+            secondAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+        }
+        if(document.querySelector('#airplane-container-2')!=null){
+            document.getElementById("airplane-container-2").style.width="200px";
+            document.getElementById("airplane-container-2").style.height="160px";
+
+            thirdAirplaneHead.classList.replace("head-rotated", "head")
+            thirdAirplaneWings.classList.replace("wings-rotated", "wings")
+            thirdAirplaneCabins.classList.replace("cabins-rotated", "cabins")
+            thirdAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+        }
     }
 
     function changeFlexDirection(flexDirectionType){
+    if(document.querySelector('#airplane-container-0')!=null)
         document.getElementById("airplane-container-0").style.flexDirection=flexDirectionType
+    if(document.querySelector('#airplane-container-1')!=null)
         document.getElementById("airplane-container-1").style.flexDirection=flexDirectionType
+    if(document.querySelector('#airplane-container-2')!=null)
         document.getElementById("airplane-container-2").style.flexDirection=flexDirectionType
     }
 
     //Airplanes
     //rotate the airplanes
     function rotate(){
-        
         switch (rotationType){
             case 1:
                 changeFlexDirection("row")
@@ -115,8 +141,38 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
-    createBoard(userGrid, userSquares)
-    createBoard(computerGrid, computerSquares)
+    //moving the planes around the user map container
+
+    const draggables=document.querySelectorAll('.draggable')
+    const containers=document.querySelectorAll('.container')
+
+    draggables.forEach(draggable =>{
+        draggable.addEventListener('dragstart',()=>{
+            draggable.classList.add('dragging')
+        })
+        draggable.addEventListener('dragend',()=>{
+            draggable.classList.remove('dragging')
+        })
+    })
+
+    containers.forEach(container =>{
+        container.addEventListener('dragover', e=>{
+            e.preventDefault()
+            const draggable=document.querySelector('.dragging')
+            container.appendChild(draggable)
+            draggable.removeAttribute('id')
+        })
+    })
+
+    window.addEventListener('mousemove', function(e){
+        console.log(e);
+    })
+
+
+
+
+    //createBoard(userGrid, userSquares)
+    //createBoard(computerGrid, computerSquares)
     rotateButton.addEventListener('click', rotate)
 
 
