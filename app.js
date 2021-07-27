@@ -28,9 +28,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const userSquares=[]
     const computerSquares=[]
     const width=10
-   
-    let isHorizontal=true;
 
+    var flexDirectionType=[]
+    var currentStyle=[]
+    var changedStyle=[]
+   
+    var rotationType=1;
 
     //Create the boards
     function createBoard(grid, squares){
@@ -40,56 +43,80 @@ document.addEventListener('DOMContentLoaded', ()=>{
             grid.appendChild(square)
             squares.push(square)
         }
-    }    
+    }
 
-    createBoard(userGrid, userSquares)
-    createBoard(computerGrid, computerSquares)
+    function changeFromBasicToRotated(){
+        firstAirplaneHead.classList.replace("head", "head-rotated")
+        secondAirplaneHead.classList.replace("head", "head-rotated")
+        thirdAirplaneHead.classList.replace("head", "head-rotated")
+
+        firstAirplaneWings.classList.replace("wings", "wings-rotated")
+        secondAirplaneWings.classList.replace("wings", "wings-rotated")
+        thirdAirplaneWings.classList.replace("wings", "wings-rotated")
+
+        firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+        secondAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+        thirdAirplaneCabins.classList.replace("cabins", "cabins-rotated")
+            
+        firstAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+        secondAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+        thirdAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
+    }
+
+    function changeFromRotatedToBasic(){
+        firstAirplaneHead.classList.replace("head-rotated", "head")
+        secondAirplaneHead.classList.replace("head-rotated", "head")
+        thirdAirplaneHead.classList.replace("head-rotated", "head")
+
+        firstAirplaneWings.classList.replace("wings-rotated", "wings")
+        secondAirplaneWings.classList.replace("wings-rotated", "wings")
+        thirdAirplaneWings.classList.replace("wings-rotated", "wings")
+
+        firstAirplaneCabins.classList.replace("cabins-rotated", "cabins")
+        secondAirplaneCabins.classList.replace("cabins-rotated", "cabins")
+        thirdAirplaneCabins.classList.replace("cabins-rotated", "cabins")
+        
+        firstAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+        secondAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+        thirdAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
+    }
+
+    function changeFlexDirection(flexDirectionType){
+        document.getElementById("airplane-container-0").style.flexDirection=flexDirectionType
+        document.getElementById("airplane-container-1").style.flexDirection=flexDirectionType
+        document.getElementById("airplane-container-2").style.flexDirection=flexDirectionType
+    }
 
     //Airplanes
     //rotate the airplanes
     function rotate(){
-        if (isHorizontal){
-
-            document.getElementById("airplane-container-0").style.flexDirection="row";
-
-            firstAirplaneHead.classList.replace("head", "head-rotated")
-            secondAirplaneHead.classList.replace("head", "head-rotated")
-            thirdAirplaneHead.classList.replace("head", "head-rotated")
-
-            firstAirplaneWings.classList.replace("wings", "wings-rotated")
-            secondAirplaneWings.classList.replace("wings", "wings-rotated")
-            thirdAirplaneWings.classList.replace("wings", "wings-rotated")
-
-            /*firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-            secondAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-            thirdAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-
-            firstAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-            secondAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-            thirdAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-            */
-            isHorizontal=false 
-        }
-        else{
-            firstAirplaneHead.classList.replace("head-rotated", "head")
-            secondAirplaneHead.classList.replace("head-rotated", "head")
-            thirdAirplaneHead.classList.replace("head-rotated", "head")
-
-            firstAirplaneWings.classList.replace("wings-rotated", "wings")
-            secondAirplaneWings.classList.replace("wings-rotated", "wings")
-            thirdAirplaneWings.classList.replace("wings-rotated", "wings")
-
-            firstAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-            secondAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-            thirdAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-
-            firstAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-            secondAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-            thirdAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-
-            isHorizontal=true
+        
+        switch (rotationType){
+            case 1:
+                changeFlexDirection("row")
+                changeFromBasicToRotated()
+                rotationType=2 
+                break; 
+            case 2:
+                changeFlexDirection("column-reverse")
+                changeFromRotatedToBasic()
+                rotationType=3
+                break; 
+            case 3:
+                changeFlexDirection("row-reverse")
+                changeFromBasicToRotated()
+                rotationType=4
+                break;
+            case 4:
+                changeFlexDirection("column")
+                changeFromRotatedToBasic()
+                rotationType=1
+                break;
         }
     }
+
+    createBoard(userGrid, userSquares)
+    createBoard(computerGrid, computerSquares)
     rotateButton.addEventListener('click', rotate)
 
 

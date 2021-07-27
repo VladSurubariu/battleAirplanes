@@ -29,7 +29,7 @@
     width: 720px;
     height: 240px;
     margin: 20px;
-    background-color: lightblue;
+    background-color: transparent;
     display: flex;
 }
 
@@ -41,7 +41,6 @@
     flex-direction: column;
     background-color:transparent;
 }
-
 
 .second-airplane-container{
     width: 200px;
@@ -74,7 +73,7 @@
     height: 40px;
     margin-top: 80px;
     margin-bottom: 80px;
-    background-color: black;
+    background-color: seagreen;
 }
 
 .wings{
@@ -89,9 +88,9 @@
     height: 200px;
     display:flex;
     flex-direction: column;
-    background-color: black;
+    background-color: seagreen;
 }
-/*
+
 .cabins{
     width: 40px;
     height: 40px;
@@ -103,9 +102,9 @@
 .cabins-rotated{
     width: 40px;
     height: 40px;
-    margin-left: 80px;
-    margin-right: 80px;
-    background: black;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    background: seagreen;
 }
 
 .tail-plane{
@@ -118,14 +117,14 @@
 }
 
 .tail-plane-rotated{
-    margin-left:20px;
-    margin-right:20px;
-    width:120px;
-    height: 40px;
+    margin-top:40px;
+    margin-bottom:40px;
+    width:40px;
+    height: 120px;
     display:flex;
-    background-color: black;
+    flex-direction: column;
+    background-color: seagreen;
 }
-*/
 
 .block div{
     width: 40px;
