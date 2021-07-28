@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     function createAirplaneRotation4(xAxisValue, yAxisValue){
-        if(xAxisValue>=160 && yAxisValue>=120 && yAxisValue <=280){
+        if(xAxisValue>=120 && yAxisValue>=80 && yAxisValue <=280){
             createNewElement(xAxisValue, yAxisValue)
             createNewElement(xAxisValue-40, yAxisValue)
             createNewElement(xAxisValue-40, yAxisValue-80)
@@ -255,10 +255,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var numberOfTurns=0
     var missOrHit
 
+    function createMissSquare(xMousePosition, yMousePosition){
+        const newElement=document.createElement("div")
+        newElement.classList.add('miss')
+        grid.appendChild(newElement)
+        newElement.style.position="absolute";
+        newElement.style.top=yMousePosition;
+        newElement.style.left=xMousePosition;
+    }
+    
+
     function mousePositon(event){
         xMousePosition=event.pageX
         yMousePosition=event.pageY
-        if(xMousePosition>=68 && yMousePosition>=60 && xMousePosition<=468 && yMousePosition <=460){
+        if(xMousePosition>=68 && yMousePosition>=60 && xMousePosition<=468 && yMousePosition <=460 && numberOfTurns<30){
             xMousePosition=xMousePosition-68
             yMousePosition=yMousePosition-60
 
@@ -268,11 +278,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             xMousePosition=convertToString(xMousePosition)
             yMousePosition=convertToString(yMousePosition)
 
-            console.log(xMousePosition, yMousePosition)
-
             var axisClass=xAxisLetter.concat(xMousePosition).concat("y").concat(yMousePosition)
             missOrHit=document.getElementsByClassName(axisClass)
-            //console.log(axisClass)
             if(missOrHit.length > 0){
                
                 var hitPartString=dotString.concat(axisClass)
@@ -280,24 +287,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 hitPart.classList.add("hit")
             }
             else{
-                console.log('miss')
+                createMissSquare(xMousePosition, yMousePosition)
             }
-            
+            numberOfTurns++   
         }
-        
-        
+        if(numberOfTurns>=30)
+            alert('Ai irosit cele 30 de incercari')
     }
 
-    document.addEventListener("click", mousePositon)
+    
 
 
-    function start(){
-
-    }
 
     //createBoard(userGrid, userSquares)
-    rotateButton.addEventListener('click', rotate)
-    startButton.addEventListener('click', start)
+    rotateButton.addEventListener('click', rotate)   
 
 
 })
