@@ -10,16 +10,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const firstAirplaneCabins=document.querySelector('.first-airplane-2')
     const firstAirplaneTail=document.querySelector('.first-airplane-3')
 
-    const secondAirplaneHead=document.querySelector('.second-airplane-0')
-    const secondAirplaneWings=document.querySelector('.second-airplane-1')
-    const secondAirplaneCabins=document.querySelector('.second-airplane-2')
-    const secondAirplaneTail=document.querySelector('.second-airplane-3')
-
-    const thirdAirplaneHead=document.querySelector('.third-airplane-0')
-    const thirdAirplaneWings=document.querySelector('.third-airplane-1')
-    const thirdAirplaneCabins=document.querySelector('.third-airplane-2')
-    const thirdAirplaneTail=document.querySelector('.third-airplane-3')
-
     const startButton=document.querySelector('#start-button')
     const rotateButton=document.querySelector('#rotate-button')
     const whoseGo=document.querySelector('#whose-go')
@@ -35,16 +25,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
    
     var rotationType=1;
 
-    //Create the boards
-    /*function createBoard(grid, squares){
-        for(let i=0; i<width*width; i++){
-            const square=document.createElement('div')
-            square.dataset.id=i
-            grid.appendChild(square)
-            squares.push(square)
-        }
-    }*/
-
     function changeFromBasicToRotated(){
         if(document.querySelector('#airplane-container-0')!=null){
             document.getElementById("airplane-container-0").style.width="160px";
@@ -54,24 +34,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             firstAirplaneWings.classList.replace("wings", "wings-rotated")
             firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
             firstAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-        }
-        if(document.querySelector('#airplane-container-1')!=null){
-            document.getElementById("airplane-container-1").style.width="160px";
-            document.getElementById("airplane-container-1").style.height="200px";
-
-            secondAirplaneHead.classList.replace("head", "head-rotated")
-            secondAirplaneWings.classList.replace("wings", "wings-rotated")
-            secondAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-            secondAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
-        }
-        if(document.querySelector('#airplane-container-2')!=null){
-            document.getElementById("airplane-container-2").style.width="160px";
-            document.getElementById("airplane-container-2").style.height="200px";
-
-            thirdAirplaneHead.classList.replace("head", "head-rotated")
-            thirdAirplaneWings.classList.replace("wings", "wings-rotated")
-            thirdAirplaneCabins.classList.replace("cabins", "cabins-rotated")
-            thirdAirplaneTail.classList.replace("tail-plane", "tail-plane-rotated")
         }
     }
 
@@ -85,33 +47,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
             firstAirplaneCabins.classList.replace("cabins-rotated", "cabins")
             firstAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
         }
-        if(document.querySelector('#airplane-container-1')!=null){
-            document.getElementById("airplane-container-1").style.width="200px";
-            document.getElementById("airplane-container-1").style.height="160px";
-
-            secondAirplaneHead.classList.replace("head-rotated", "head")
-            secondAirplaneWings.classList.replace("wings-rotated", "wings")
-            secondAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-            secondAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-        }
-        if(document.querySelector('#airplane-container-2')!=null){
-            document.getElementById("airplane-container-2").style.width="200px";
-            document.getElementById("airplane-container-2").style.height="160px";
-
-            thirdAirplaneHead.classList.replace("head-rotated", "head")
-            thirdAirplaneWings.classList.replace("wings-rotated", "wings")
-            thirdAirplaneCabins.classList.replace("cabins-rotated", "cabins")
-            thirdAirplaneTail.classList.replace("tail-plane-rotated", "tail-plane")
-        }
     }
 
     function changeFlexDirection(flexDirectionType){
     if(document.querySelector('#airplane-container-0')!=null)
         document.getElementById("airplane-container-0").style.flexDirection=flexDirectionType
-    if(document.querySelector('#airplane-container-1')!=null)
-        document.getElementById("airplane-container-1").style.flexDirection=flexDirectionType
-    if(document.querySelector('#airplane-container-2')!=null)
-        document.getElementById("airplane-container-2").style.flexDirection=flexDirectionType
     }
 
     //Airplanes
@@ -121,58 +61,185 @@ document.addEventListener('DOMContentLoaded', ()=>{
             case 1:
                 changeFlexDirection("row")
                 changeFromBasicToRotated()
-                rotationType=2 
+                rotationType=2
+                document.getElementById("airplane-container-0").classList.replace("rotated-1", "rotated-2") 
                 break; 
             case 2:
                 changeFlexDirection("column-reverse")
                 changeFromRotatedToBasic()
                 rotationType=3
+                document.getElementById("airplane-container-0").classList.replace("rotated-2", "rotated-3") 
                 break; 
             case 3:
                 changeFlexDirection("row-reverse")
                 changeFromBasicToRotated()
                 rotationType=4
+                document.getElementById("airplane-container-0").classList.replace("rotated-3", "rotated-4") 
                 break;
             case 4:
                 changeFlexDirection("column")
                 changeFromRotatedToBasic()
                 rotationType=1
+                document.getElementById("airplane-container-0").classList.replace("rotated-4", "rotated-1") 
                 break;
         }
     }
 
+    var xAxisValue=[]
+    var yAxisValue=[]
+    var xStringValue=[]
+    var yStringValue=[]
+    var pixelsString="px"
+    var idAirPlanes=-1
+    var stringIdAirPlanes=[]
+
+    const grid=document.querySelector('.grid')
+    
+
+    function createNewDiv(xStringValue, yStringValue){
+        const newElement=document.createElement("div")
+        newElement.classList.add('square')
+        grid.appendChild(newElement)
+        idAirPlanes++  
+        stringIdAirPlanes=idAirPlanes.toString()
+        newElement.classList.add(stringIdAirPlanes)
+        newElement.style.position="absolute";
+        newElement.style.top=yStringValue;
+        newElement.style.left=xStringValue;
+         
+    }
+
+    function convertToString(coordValue){
+        var toString=coordValue.toString();
+        return toString.concat(pixelsString)
+    }
+
+    function createNewElement(xAxisValue, yAxisValue){
+        xStringValue=convertToString(xAxisValue)
+        yStringValue=convertToString(yAxisValue)
+        createNewDiv(xStringValue, yStringValue) 
+    }
+
+    function changeCoordinateToFit(coordValue){
+        var valueDividedToForty=Math.floor(coordValue/40)
+        if(valueDividedToForty == 0){
+            coordValue=0
+        }
+        else{
+            coordValue=valueDividedToForty*40
+        }
+        return coordValue
+    }
+
+    function findAirplaneRotationValue(){
+        if(document.getElementById("airplane-container-0").classList.contains("rotated-1")){
+            return 1
+        }
+        if(document.getElementById("airplane-container-0").classList.contains("rotated-2")){
+            return 2
+        }
+        if(document.getElementById("airplane-container-0").classList.contains("rotated-3")){
+            return 3
+        }
+        if(document.getElementById("airplane-container-0").classList.contains("rotated-4")){
+            return 4
+        }
+    }
+
+    function createAirplaneRotation1 (xAxisValue, yAxisValue){
+        if(xAxisValue>=80 && xAxisValue<=320 && yAxisValue<=240){
+            createNewElement(xAxisValue, yAxisValue)
+            createNewElement(xAxisValue-80, yAxisValue+40)
+            createNewElement(xAxisValue-40, yAxisValue+40)
+            createNewElement(xAxisValue, yAxisValue+40)
+            createNewElement(xAxisValue+40, yAxisValue+40)
+            createNewElement(xAxisValue+80, yAxisValue+40)
+            createNewElement(xAxisValue, yAxisValue+80)
+            createNewElement(xAxisValue-40, yAxisValue+120)
+            createNewElement(xAxisValue, yAxisValue+120)
+            createNewElement(xAxisValue+40, yAxisValue+120)
+        }
+    }
+
+    function createAirplaneRotation2(xAxisValue, yAxisValue){
+        if(xAxisValue<=240 && yAxisValue>=80 && yAxisValue<=280){
+            createNewElement(xAxisValue, yAxisValue)
+            createNewElement(xAxisValue+40, yAxisValue)
+            createNewElement(xAxisValue+40, yAxisValue-40)
+            createNewElement(xAxisValue+40, yAxisValue-80)
+            createNewElement(xAxisValue+40, yAxisValue+80)
+            createNewElement(xAxisValue+40, yAxisValue+40)
+            createNewElement(xAxisValue+80, yAxisValue)
+            createNewElement(xAxisValue+120, yAxisValue)
+            createNewElement(xAxisValue+120, yAxisValue-40)
+            createNewElement(xAxisValue+120, yAxisValue+40)
+        }
+    }
+
+    function createAirplaneRotation3(xAxisValue, yAxisValue){
+        if(xAxisValue>=80 && xAxisValue<=280 && yAxisValue>=120){
+            createNewElement(xAxisValue, yAxisValue)
+            createNewElement(xAxisValue, yAxisValue-40)
+            createNewElement(xAxisValue-40, yAxisValue-40)
+            createNewElement(xAxisValue-80, yAxisValue-40)
+            createNewElement(xAxisValue+40, yAxisValue-40)
+            createNewElement(xAxisValue+80, yAxisValue-40)
+            createNewElement(xAxisValue, yAxisValue-80)
+            createNewElement(xAxisValue, yAxisValue-120)
+            createNewElement(xAxisValue-40, yAxisValue-120)
+            createNewElement(xAxisValue+40, yAxisValue-120)
+        }
+    }
+
+    function createAirplaneRotation4(xAxisValue, yAxisValue){
+        if(xAxisValue>=160 && yAxisValue>=120 && yAxisValue <=280){
+            createNewElement(xAxisValue, yAxisValue)
+            createNewElement(xAxisValue-40, yAxisValue)
+            createNewElement(xAxisValue-40, yAxisValue-80)
+            createNewElement(xAxisValue-40, yAxisValue-40)
+            createNewElement(xAxisValue-40, yAxisValue+40)
+            createNewElement(xAxisValue-40, yAxisValue+80)
+            createNewElement(xAxisValue-80, yAxisValue)
+            createNewElement(xAxisValue-120, yAxisValue)
+            createNewElement(xAxisValue-120, yAxisValue+40)
+            createNewElement(xAxisValue-120, yAxisValue-40)
+        }
+    }
+
+    function createAirplane(xAxisValue, yAxisValue, airplaneRotationValue){ 
+        xAxisValue=changeCoordinateToFit(xAxisValue)
+        yAxisValue=changeCoordinateToFit(yAxisValue)
+        if (airplaneRotationValue==1){
+            createAirplaneRotation1(xAxisValue, yAxisValue)
+        }
+        if(airplaneRotationValue==2){
+            createAirplaneRotation2(xAxisValue, yAxisValue)
+        }
+        if(airplaneRotationValue==3){
+            createAirplaneRotation3(xAxisValue, yAxisValue)
+        }
+        if(airplaneRotationValue==4){
+            createAirplaneRotation4(xAxisValue, yAxisValue)
+        }
+
+        
+    }
+
     //moving the planes around the user map container
-
-    const draggables=document.querySelectorAll('.draggable')
-    const containers=document.querySelectorAll('.container')
-
-    draggables.forEach(draggable =>{
-        draggable.addEventListener('dragstart',()=>{
-            draggable.classList.add('dragging')
-        })
-        draggable.addEventListener('dragend',()=>{
-            draggable.classList.remove('dragging')
-        })
+    const draggableElement=document.querySelector('.draggable');
+    var airplaneRotationValue;
+    draggableElement.addEventListener('dragstart', e=>{
+        airplaneRotationValue=findAirplaneRotationValue()
     })
-
-    containers.forEach(container =>{
-        container.addEventListener('dragover', e=>{
-            e.preventDefault()
-            const draggable=document.querySelector('.dragging')
-            container.appendChild(draggable)
-            draggable.removeAttribute('id')
-        })
-    })
-
-    window.addEventListener('mousemove', function(e){
-        console.log(e);
-    })
-
-
-
+    draggableElement.addEventListener('dragend', e=>{
+        xAxisValue=e.pageX;
+        yAxisValue=e.pageY;
+        if(xAxisValue>=68 && yAxisValue>=60){
+            createAirplane(xAxisValue-68, yAxisValue-60, airplaneRotationValue)
+        }
+    })    
 
     //createBoard(userGrid, userSquares)
-    //createBoard(computerGrid, computerSquares)
     rotateButton.addEventListener('click', rotate)
 
 
