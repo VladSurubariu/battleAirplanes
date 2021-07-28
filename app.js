@@ -263,7 +263,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         newElement.style.top=yMousePosition;
         newElement.style.left=xMousePosition;
     }
-    
 
     function mousePositon(event){
         xMousePosition=event.pageX
@@ -281,7 +280,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
             var axisClass=xAxisLetter.concat(xMousePosition).concat("y").concat(yMousePosition)
             missOrHit=document.getElementsByClassName(axisClass)
             if(missOrHit.length > 0){
-               
+                var hitHead0=axisClass.concat(" 0")
+                var hitHead1=axisClass.concat(" 10")
+                var hitHead2=axisClass.concat(" 20")
+                
+                var checkIfHeadIsHit0=document.getElementsByClassName(hitHead0)
+                var checkIfHeadIsHit1=document.getElementsByClassName(hitHead1)
+                var checkIfHeadIsHit2=document.getElementsByClassName(hitHead2)
+
+                if(checkIfHeadIsHit0.length>0){
+                    console.log("head hit")
+                }
+                else if(checkIfHeadIsHit1.length>0){
+                    console.log("head hit")
+                }
+                else if(checkIfHeadIsHit2.length>0){
+                    console.log("head hit")
+                }
+                
                 var hitPartString=dotString.concat(axisClass)
                 var hitPart=document.querySelector(hitPartString)
                 hitPart.classList.add("hit")
@@ -295,6 +311,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             alert('Ai irosit cele 30 de incercari')
     }
 
+    document.addEventListener("click", mousePositon)
     
 
 
