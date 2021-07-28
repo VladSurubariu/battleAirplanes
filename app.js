@@ -25,11 +25,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
    
     var rotationType=1;
 
+    const xAxisLetter="x"
+     var dotString="."
+
     function changeFromBasicToRotated(){
         if(document.querySelector('#airplane-container-0')!=null){
             document.getElementById("airplane-container-0").style.width="160px";
             document.getElementById("airplane-container-0").style.height="200px";
-
             firstAirplaneHead.classList.replace("head", "head-rotated")
             firstAirplaneWings.classList.replace("wings", "wings-rotated")
             firstAirplaneCabins.classList.replace("cabins", "cabins-rotated")
@@ -103,6 +105,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         idAirPlanes++  
         stringIdAirPlanes=idAirPlanes.toString()
         newElement.classList.add(stringIdAirPlanes)
+        var axisClass=xAxisLetter.concat(xStringValue).concat("y").concat(yStringValue)
+        newElement.classList.add(axisClass)
         newElement.style.position="absolute";
         newElement.style.top=yStringValue;
         newElement.style.left=xStringValue;
@@ -228,19 +232,72 @@ document.addEventListener('DOMContentLoaded', ()=>{
     //moving the planes around the user map container
     const draggableElement=document.querySelector('.draggable');
     var airplaneRotationValue;
+    var numberOfPlanes=0;
     draggableElement.addEventListener('dragstart', e=>{
         airplaneRotationValue=findAirplaneRotationValue()
     })
     draggableElement.addEventListener('dragend', e=>{
         xAxisValue=e.pageX;
         yAxisValue=e.pageY;
-        if(xAxisValue>=68 && yAxisValue>=60){
+        if(xAxisValue>=68 && yAxisValue>=60 && xAxisValue<=468 && yAxisValue<=460 && numberOfPlanes<3){
             createAirplane(xAxisValue-68, yAxisValue-60, airplaneRotationValue)
+            numberOfPlanes++
+            console.log(numberOfPlanes)
         }
-    })    
+        else{
+            console.log(numberOfPlanes)
+            console.log('cant place plane')
+        }
+    })
+
+    var xMousePosition
+    var yMousePosition
+    var numberOfTurns=0
+    var missOrHit
+
+    function mousePositon(event){
+        xMousePosition=event.pageX
+        yMousePosition=event.pageY
+        if(xMousePosition>=68 && yMousePosition>=60 && xMousePosition<=468 && yMousePosition <=460){
+            xMousePosition=xMousePosition-68
+            yMousePosition=yMousePosition-60
+
+            xMousePosition=changeCoordinateToFit(xMousePosition)
+            yMousePosition=changeCoordinateToFit(yMousePosition)
+                        
+            xMousePosition=convertToString(xMousePosition)
+            yMousePosition=convertToString(yMousePosition)
+
+            console.log(xMousePosition, yMousePosition)
+
+            var axisClass=xAxisLetter.concat(xMousePosition).concat("y").concat(yMousePosition)
+            missOrHit=document.getElementsByClassName(axisClass)
+            //console.log(axisClass)
+            if(missOrHit.length > 0){
+               
+                var hitPartString=dotString.concat(axisClass)
+                var hitPart=document.querySelector(hitPartString)
+                hitPart.classList.add("hit")
+            }
+            else{
+                console.log('miss')
+            }
+            
+        }
+        
+        
+    }
+
+    document.addEventListener("click", mousePositon)
+
+
+    function start(){
+
+    }
 
     //createBoard(userGrid, userSquares)
     rotateButton.addEventListener('click', rotate)
+    startButton.addEventListener('click', start)
 
 
 })
