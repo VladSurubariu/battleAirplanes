@@ -1,9 +1,9 @@
-.main-container {
+.main-container {  /*styling of the main display */
     display: flex;
     margin:20px;
 }
 
-.grid-user {
+.grid-user { /*styling of the gameboard*/
     width: 400px;
     height: 400px;
     display: flex;
@@ -14,7 +14,7 @@
     left:68px; 
 }
 
-.grid-display {
+.grid-display { /* styling of the airplane container*/
     width: 240px;
     height: 240px;
     margin: 20px;
@@ -25,13 +25,13 @@
     flex-direction: row;
 }
 
-.empty-space{
+.empty-space{ /* the head of the gameboard where no info is displayed*/
     width: 40px;
     height:40px;
     background-color: transparent;
 }
 
-.numbers-row{
+.numbers-row{ 
     position: absolute;
     width: 40px;
     height: 400px;
@@ -55,7 +55,7 @@
     top: 480px;
 }
 
-.first-airplane-container{
+.first-airplane-container{ /*styling of airplane container */
     width: 200px;
     height: 160px;
     display: flex;
@@ -64,25 +64,7 @@
     background-color:transparent;
 }
 
-.second-airplane-container{
-    width: 200px;
-    height: 160px;
-    display: flex;
-    margin:20px;
-    flex-direction: column;
-    background-color: transparent;
-}
-
-.third-airplane-container{
-    width: 200px;
-    height: 160px;
-    margin:20px;
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-}
-
-.head{
+.head{ /*styling of airplane head */
     width: 40px;
     height: 40px;
     margin-left: 80px;
@@ -90,7 +72,7 @@
     background-color: seagreen;
 }
 
-.head-rotated{
+.head-rotated{ /* styling of airplane head when its horizontally rotated*/
     width: 40px;
     height: 40px;
     margin-top: 80px;
@@ -98,14 +80,14 @@
     background-color: seagreen;
 }
 
-.wings{
+.wings{/* styling of wings*/
     width: 200px;
     height: 40px;
     display:flex;
     background-color: seagreen;
 }
 
-.wings-rotated{
+.wings-rotated{ /*styling of airplane wings when they are horizontally rotated */
     width: 40px;
     height: 200px;
     display:flex;
@@ -113,7 +95,7 @@
     background-color: seagreen;
 }
 
-.cabins{
+.cabins{ /* styling of cabins*/
     width: 40px;
     height: 40px;
     margin-left: 80px;
@@ -121,7 +103,7 @@
     background: seagreen;
 }
 
-.cabins-rotated{
+.cabins-rotated{ /* styling of wings when they are horizontally rotated*/
     width: 40px;
     height: 40px;
     margin-top: 80px;
@@ -129,7 +111,7 @@
     background: seagreen;
 }
 
-.tail-plane{
+.tail-plane{ /* styling of the plane tail */
     margin-left:40px;
     margin-right:40px;
     width:120px;
@@ -138,7 +120,7 @@
     background-color: seagreen;
 }
 
-.tail-plane-rotated{
+.tail-plane-rotated{ /* styling of plane tail when its horizontally rotated*/
     margin-top:40px;
     margin-bottom:40px;
     width:40px;
@@ -148,27 +130,25 @@
     background-color: seagreen;
 }
 
-.block div{
-    width: 40px;
-    height: 40px;
-}
-
-.square{
+.square{ /* this is the styling of the divs used to create the airplanes */
     width: 40px;
     height:40px;
-    background-color: darkslategray ;
+    background-color: slategray ;
 }
 
-.hit{
+.hit{ /*this styling triggers when user hits*/
     background-color: green
 }
 
-.miss{
-    
+.miss{ /*this styling triggers when a user misses */
     background-color: red;
     width: 40px;
     height: 40px;
 }
 
 
-
+.hidden-square{ /*this should make the airplanes transparent*/
+    width:40px;
+    height: 40px;
+    background-color: transparent;
+}
