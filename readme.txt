@@ -1,2 +1,2 @@
-The code is very messy because Im still working on it
-More updates will come and the code will be better organized and there will be comments used
+The project is nearly complete. 
+Back-end part is done, but there are more updates to be done to the front-end part. 
