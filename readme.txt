@@ -1,2 +1,1 @@
-The project is nearly complete. 
-Back-end part is done, but there are more updates to be done to the front-end part. 
+Theres a scoreboard to be done and then there are plenty of updates to come for the front-end part.
