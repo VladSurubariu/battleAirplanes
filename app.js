@@ -35,11 +35,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
     
     //function hides or unhides airplanes. associated with "Show planes" button
     function unhide(){
-        if(show){
-            show=false
+        var squareBlock=document.getElementsByClassName("square") //we are searching for all the elements that contain the class "square"
+        if(show){ //the variable show is true by default, because the airplanes are showed by default
+            show=false //if the value was true, now the airplanes will be hidden and the variable has to be false because the airplanes are not shown
+            for(var countIndex=0; countIndex<squareBlock.length; countIndex++){  //we are modifying each of them
+                squareBlock[countIndex].classList.add("hidden-square") //we are adding the class "hidden-square" to make them transparent
+            }            
         }
         else{
-            show=true
+            show=true //if the planes were hidden we are going to make them appear back, so the value of "show" has to be true
+            for(var countIndex=0; countIndex<squareBlock.length; countIndex++){ //we are modifying each of them
+                squareBlock[countIndex].classList.remove("hidden-square") //we are removing the class "hidden-square" to make them appear back
+            }
         }
     }
     //by pressing the "Show planes" button show variable changes its value from true to false or from false to true
@@ -336,6 +343,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         auxID=".id".concat(auxID) //ads "id" in front of it so it matches the class name pattern
         document.querySelector(auxID).classList.replace("notHit","hit") //searches for the class of the element with that id and replaces
                                                                         //the "notHit" default class with "hit" class
+        document.querySelector(auxID).classList.remove("hidden-square") //if the airplane was hit we remove the class "hidden-square"
     }
 
     //the function checks if the head of the airplane was hit
@@ -355,24 +363,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
             for(id=0;id<=9;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
+            alert("Airplane was hit in the head")
         }
         else if(checkIfHeadIsHit1.length>0){ //if we found the class "hitHead1"
             for(id=10;id<=19;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
+            alert("Airplane was hit in the head")
         }
         else if(checkIfHeadIsHit2.length>0){ //if we found the class "hitHead2"
             for(id=20;id<=29;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
+            alert("Airplane was hit in the head")
         }
-        alert("Airplane was hit in the head")
+        
     }
 
     //function checks if the game should end because every airplane was taken down 
     function checkIfAllPlanesAreHit(){
         var notHitParts=document.getElementsByClassName("notHit") //we check for elements that contain the class "notHit"
         if(notHitParts.length>0){ //if there are element with that class it means that there are still componennts that were not hit
+
             return false
         }
         else{ //if there are no elements with that class it means that there are no more airplanes left 
@@ -380,7 +392,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             return true
         }
     }
-    
+
     //function is used to take the mouse coordinates when user tries to hit the airplanes
     function mousePositon(event){ 
         xMousePosition=event.pageX //the x axis coordinate
@@ -398,11 +410,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 var hitPartString=dotString.concat(axisClass) // the hit element is created and the axisClass class is assigned
                 var hitPart=document.querySelector(hitPartString) //we search for the hit element
                 hitPart.classList.replace("notHit","hit") //and the "notHit" class is changed with "hit"
+                hitPart.classList.remove("hidden-square") //here the class hidden-square is removed so that the user can see the component he hit
                 
             }
             else{ //if there are no elements with that class it means that it was a miss
                 createMissSquare(xMousePosition-68, yMousePosition-60) //we create a red square at those coordinates
-                alert("You missed") //message
             }
             numberOfTurns++ // the number of turns goes up by one
             
@@ -417,7 +429,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
             gameOver() //gameover
             return
         }
-
+        else{
+            var turnsLeftTextString="Turns left: "
+            var turnsLeft=30-numberOfTurns
+            var turnsLeftString=turnsLeft.toString()
+            document.getElementById("turnsLeft").innerHTML=turnsLeftTextString.concat(turnsLeftString)
+        }
     }
 
     //functia dezactiveaza toate eventListener-urile
