@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var show=true //variable used to hide or unhide the airplanes
 
     var playerNumberTurn=1 //this means that its the turn of the first player. When the value of the variabile is 2, it means its the turn of the second player
+
+    var shownInfo=document.getElementById("info")
     
     //function hides or unhides airplanes. associated with "Show planes" button
     function unhide(){
@@ -365,19 +367,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
             for(id=0;id<=9;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
-            alert("Airplane was hit in the head")
+            shownInfo.innerHTML="An airplane was hit in the head"
         }
         else if(checkIfHeadIsHit1.length>0){ //if we found the class "hitHead1"
             for(id=10;id<=19;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
-            alert("Airplane was hit in the head")
+            shownInfo.innerHTML="An airplane was hit in the head"
         }
         else if(checkIfHeadIsHit2.length>0){ //if we found the class "hitHead2"
             for(id=20;id<=29;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
-            alert("Airplane was hit in the head")
+            shownInfo.innerHTML="An airplane was hit in the head"
         }
         
     }
@@ -390,7 +392,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             return false
         }
         else{ //if there are no elements with that class it means that there are no more airplanes left 
-            console.log("You destroyed the planes") //message
+            alert("You destroyed the airplanes. Congratulations") //message
             return true
         }
     }
@@ -407,27 +409,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
             
             missOrHit=document.getElementsByClassName(axisClass)  //searches if there are element that have that axisClass variable name
             if(missOrHit.length > 0){ //if there are element with that class it means the user hit a plane
-                
+
+                shownInfo.innerHTML="An airplane was hit"
                 checkIfHeadIsHit(axisClass) //checks if the head was hit and calls the functions  
                 var hitPartString=dotString.concat(axisClass) // the hit element is created and the axisClass class is assigned
                 var hitPart=document.querySelector(hitPartString) //we search for the hit element
                 hitPart.classList.replace("notHit","hit") //and the "notHit" class is changed with "hit"
                 hitPart.classList.remove("hidden-square") //here the class hidden-square is removed so that the user can see the component he hit
-                
             }
             else{ //if there are no elements with that class it means that it was a miss
                 createMissSquare(xMousePosition-68, yMousePosition-60) //we create a red square at those coordinates
+                shownInfo.innerHTML="You missed"
             }
             numberOfTurns++ // the number of turns goes up by one
             
             if(checkIfAllPlanesAreHit()){ //if every plane was hit it means the game is over
-                alert("You won. Congratulations") //message
                 resetGame() //gameover
             }
             
         }
         if(numberOfTurns>=30){ //if there were more than 30 tries and the planes have components that have not been hit
-            alert('Ai irosit cele 30 de incercari') //message
+            alert("You don't have left bullets. Your score is 0.") //message
             resetGame() //gameover
             return
         }
@@ -446,6 +448,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         numberOfPlanes=0; //the number of planes the second player used is 0
         idAirPlanes=-1; //there are no airplane components so the ids will start from -1 
         show=true; //the show variable resets to default
+        shownInfo.innerHTML="" //the info section is reinitialised, this time for the second player
     }
 
     //the function ends the game by deactivating every eventListener
