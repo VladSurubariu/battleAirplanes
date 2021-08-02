@@ -1,6 +1,14 @@
 .main-container {  /*styling of the main display */
     display: flex;
     margin:20px;
+    width:450px;
+    height: 450px;
+}
+
+.scoreboard{
+    position: absolute;
+    top: 60px;
+    left: 568px;
 }
 
 .grid-user { /*styling of the gameboard*/

@@ -9,11 +9,18 @@
     <script src="app.js" charset="utf-8"></script>
 </head>
 <body>
-    <div class="main-container" id="main-containerId"> <!--this is where the gameboard will appear-->
-        <div class="empty-space"></div>
-        <div class="numbers-row">1 2 3 4 5 6 7 8 9 10</div> <!--the div where the numbers row will appear-->
-        <div class="letters-row">A B C D E F G H I J </div> <!--the div where the letters row will appear-->
-        <div class="grid grid-user container"></div> <!--the div where the planes will appear. this represents the gameboard-->
+    <div>
+        <div class="main-container" id="main-containerId"> <!--this is where the gameboard will appear-->
+            <div class="empty-space"></div>
+            <div class="numbers-row">1 2 3 4 5 6 7 8 9 10</div> <!--the div where the numbers row will appear-->
+            <div class="letters-row">A B C D E F G H I J </div> <!--the div where the letters row will appear-->
+            <div class="grid grid-user container"></div> <!--the div where the planes will appear. this represents the gameboard-->
+        </div>
+        <div class="scoreboard">
+            <h1 id="scoreboard-title">Scoreboard</h1>
+            <h4 id="first-player-score">First Player</h4>
+            <h4 id="second-player-score">Second Player</h4>          
+        </div>
     </div>
 
     <div class="hidden-info"> 

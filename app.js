@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var dotString="." //used to concatenate strings abd to create classes
 
     var show=true //variable used to hide or unhide the airplanes
+
+    var playerNumberTurn=1 //this means that its the turn of the first player. When the value of the variabile is 2, it means its the turn of the second player
     
     //function hides or unhides airplanes. associated with "Show planes" button
     function unhide(){
@@ -420,28 +422,54 @@ document.addEventListener('DOMContentLoaded', ()=>{
             
             if(checkIfAllPlanesAreHit()){ //if every plane was hit it means the game is over
                 alert("You won. Congratulations") //message
-                gameOver() //gameover
+                resetGame() //gameover
             }
             
         }
         if(numberOfTurns>=30){ //if there were more than 30 tries and the planes have components that have not been hit
             alert('Ai irosit cele 30 de incercari') //message
-            gameOver() //gameover
+            resetGame() //gameover
             return
         }
         else{
-            var turnsLeftTextString="Turns left: "
-            var turnsLeft=30-numberOfTurns
-            var turnsLeftString=turnsLeft.toString()
-            document.getElementById("turnsLeft").innerHTML=turnsLeftTextString.concat(turnsLeftString)
+            var turnsLeft=30-numberOfTurns //the var turnsLeft counts how many moves can the user make from this point forward
+            document.getElementById("turnsLeft").innerHTML="Turns left: ".concat(turnsLeft) //the variable turnsLeft is used to show a message that tells the user 
+                                                                                            //how many moves can he make from this point forward
         }
     }
 
-    //functia dezactiveaza toate eventListener-urile
+    //the function reinitialises the variables so that the second player can place his airplanes 
+    function secondPlayerTurn(){ 
+        grid.innerHTML=""; //every div within the grid is deleted
+        playerNumberTurn=2; //variable playerNumberTurn is 2 because now its the second player's turn
+        numberOfTurns=0; //the bullets the second player used is 0
+        numberOfPlanes=0; //the number of planes the second player used is 0
+        idAirPlanes=-1; //there are no airplane components so the ids will start from -1 
+        show=true; //the show variable resets to default
+    }
+
+    //the function ends the game by deactivating every eventListener
     function gameOver(){
-        document.removeEventListener("click", mousePositon)
+        document.removeEventListener("click", mousePositon) 
         rotateButton.removeEventListener("click", rotate)
         showPlanesButton.removeEventListener("click", unhide)
+    }
+
+
+    //the function resets the game if it was player 1's turn and ends the game if it was player 2's turn
+    function resetGame(){
+        if(playerNumberTurn==1){ //if it was player 1's turn
+            var turnsLeft=30-numberOfTurns //the turnsLeft is the score of the first player
+            document.getElementById("first-player-score").innerHTML="First Player: ".concat(turnsLeft) //the html is updated to show the first player's turn
+            secondPlayerTurn() //secondPlayer starts his turn
+            return
+        }
+        if(playerNumberTurn==2){ //if it was player 2's turn
+            var turnsLeft=30-numberOfTurns //the turnsLeft is the score of the second player
+            document.getElementById("second-player-score").innerHTML="Second Player: ".concat(turnsLeft) //the html is updated to show the second player's turn
+            gameOver()
+            return
+        }
     }
 
     //associates function with click    
