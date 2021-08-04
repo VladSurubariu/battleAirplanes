@@ -20,8 +20,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const showPlanesButton=document.querySelector('#show-planes-button')
     //the element used to activate the hide/unhide function
 
-    const info=document.querySelector('#info')
-    //the element used to show info about turns: if the plane was destroyed, if the user hit or if he missed
+    
+
+    var shownInfo=document.getElementById("info") 
+    //the element used to show info about turns: if a plane was hit or not 
 
     var flexDirectionType=[] //variabile used to show the direction of the plane
    
@@ -35,7 +37,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     var playerNumberTurn=1 //this means that its the turn of the first player. When the value of the variabile is 2, it means its the turn of the second player
 
-    var shownInfo=document.getElementById("info")
     
     //function hides or unhides airplanes. associated with "Show planes" button
     function unhide(){
@@ -288,9 +289,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     draggableElement.addEventListener('dragend', e=>{ //when the drag events stops
         xAxisValue=e.pageX; //x axis value takes the x axis value of the mouse
         yAxisValue=e.pageY; //y axis value takes the y axis value of the mouse
-        if(xAxisValue>=68 && yAxisValue>=60 && xAxisValue<=468 && yAxisValue<=460 && numberOfPlanes<3){ //if the drag ends 
+        if(xAxisValue>=200 && yAxisValue>=140 && xAxisValue<=600 && yAxisValue<=540 && numberOfPlanes<3){ //if the drag ends 
                                                                                             //on the game-board
-            createAirplane(xAxisValue-68, yAxisValue-60, airplaneRotationValue, numberOfPlanes) //create the airplane 
+            createAirplane(xAxisValue-200, yAxisValue-140, airplaneRotationValue, numberOfPlanes) //create the airplane 
             //the parameters are xAxisValue-68 and yAxisValue-60 because we want to eliminate the margin of the board game, so the first
             //element on the board will have the coordinates [0][0] and the last element will have the coordinates [400][400]
             numberOfPlanes++ //after each plane is created the number of planes goes up by 1
@@ -379,7 +380,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             for(id=20;id<=29;id++){
                 changeStatusFromNotHitToHit(id) //it changes the status of all airplane components to hit
             }
-            shownInfo.innerHTML="An airplane was hit in the head"
+            shownInfo.innerHTML="The head was hit!"
         }
         
     }
@@ -392,7 +393,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             return false
         }
         else{ //if there are no elements with that class it means that there are no more airplanes left 
-            alert("You destroyed the airplanes. Congratulations") //message
+            alert("You destroyed the airplanes. Congratulations!") //message
             return true
         }
     }
@@ -402,10 +403,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
         xMousePosition=event.pageX //the x axis coordinate
         yMousePosition=event.pageY //the y axis coordinate
 
-        if(xMousePosition>=68 && yMousePosition>=60 && xMousePosition<=468 && yMousePosition <=460 && numberOfTurns<30){ 
+        if(xMousePosition>=200 && yMousePosition>=140 && xMousePosition<=600 && yMousePosition <=540 && numberOfTurns<30){ 
             //if the click was made inside the gameboard
             
-            var axisClass=createAxisClass(xMousePosition-68, yMousePosition-60) //creates the axisClass variable
+            var axisClass=createAxisClass(xMousePosition-200, yMousePosition-140) //creates the axisClass variable
             
             missOrHit=document.getElementsByClassName(axisClass)  //searches if there are element that have that axisClass variable name
             if(missOrHit.length > 0){ //if there are element with that class it means the user hit a plane
@@ -418,7 +419,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 hitPart.classList.remove("hidden-square") //here the class hidden-square is removed so that the user can see the component he hit
             }
             else{ //if there are no elements with that class it means that it was a miss
-                createMissSquare(xMousePosition-68, yMousePosition-60) //we create a red square at those coordinates
+                createMissSquare(xMousePosition-200, yMousePosition-140) //we create a red square at those coordinates
                 shownInfo.innerHTML="You missed"
             }
             numberOfTurns++ // the number of turns goes up by one
@@ -477,8 +478,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     //associates function with click    
     document.addEventListener("click", mousePositon)
+
     //associates function with rotate button
     rotateButton.addEventListener('click', rotate)   
+
     //associates function with show planes button
     showPlanesButton.addEventListener("click", unhide)
+
 })

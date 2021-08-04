@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleplanes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>let gameMode="bestOfThree"</script>
+    <script src="app.js" charset="utf-8"></script>
+</head>
+<body>
+    <div>
+        <div class="main-container" id="main-containerId"> <!--this is where the gameboard will appear-->
+            <div class="empty-space"></div>
+            <div class="numbers-row">1 2 3 4 5 6 7 8 9 10</div> <!--the div where the numbers row will appear-->
+            <div class="letters-row">A B C D E F G H I J </div> <!--the div where the letters row will appear-->
+            <div class="grid grid-user container"></div> <!--the div where the planes will appear. this represents the gameboard-->
+        </div>
+        <div class="scoreboard">
+            <h1 id="scoreboard-title">Scoreboard</h1>
+            <h4 id="first-player-score">First Player</h4>
+            <h4 id="second-player-score">Second Player</h4>          
+        </div>
+        <h3 id="info"></h3>
+    </div>
+
+    <div class="hidden-info"> 
+        <div>
+            <button id="rotate-button little-button">Rotate the plane</button> <!--the button that rotates planes-->
+            <button id="show-planes-button little-button">Hide/Unhide Airplanes</button> <!-- the button that hides or unhides the gameboard-->
+        </div>
+    </div>
+
+    <h3 class="hidden-info" id="turnsLeft">Turns left: 30</h3> <!--the number of turns will be written here-->
+
+    <div class="grid-display"> <!-- this is where planes will be dragged from-->
+        <div class="airplane first-airplane-container draggable rotated-1" id="airplane-container-0" draggable="true"> 
+            <div class="first-airplane-0 head block"> <!--the head of the plane 1x1-->
+                <div></div>
+            </div>
+            <div class="first-airplane-1 wings block"><!--the wings 5x1-->
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="first-airplane-2 cabins block"><!--the cabins 1x1-->
+                <div></div>
+            </div>
+            <div class="first-airplane-3 tail-plane block"> <!--the tail-plane 3x1-->
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
