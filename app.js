@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     var playerNumberTurn=1 //this means that its the turn of the first player. When the value of the variabile is 2, it means its the turn of the second player
 
+    var player1Wins=0 //counts the number of wins of the first player
+
+    var player2Wins=0 //counts the number of wins of the second player
+
+    var roundsPlayed=0 //counts the number of played rounds
     
     //function hides or unhides airplanes. associated with "Show planes" button
     function unhide(){
@@ -286,6 +291,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     draggableElement.addEventListener('dragstart', e=>{ //when the drag event starts
         airplaneRotationValue=findAirplaneRotationValue() //we take the rotationType value of the dragged airplane
     })
+
     draggableElement.addEventListener('dragend', e=>{ //when the drag events stops
         xAxisValue=e.pageX; //x axis value takes the x axis value of the mouse
         yAxisValue=e.pageY; //y axis value takes the y axis value of the mouse
@@ -398,6 +404,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    var turnsLeft; //counts how many moves can the player make from this point forward
+
     //function is used to take the mouse coordinates when user tries to hit the airplanes
     function mousePositon(event){ 
         xMousePosition=event.pageX //the x axis coordinate
@@ -410,7 +418,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             
             missOrHit=document.getElementsByClassName(axisClass)  //searches if there are element that have that axisClass variable name
             if(missOrHit.length > 0){ //if there are element with that class it means the user hit a plane
-
                 shownInfo.innerHTML="An airplane was hit"
                 checkIfHeadIsHit(axisClass) //checks if the head was hit and calls the functions  
                 var hitPartString=dotString.concat(axisClass) // the hit element is created and the axisClass class is assigned
@@ -432,24 +439,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(numberOfTurns>=30){ //if there were more than 30 tries and the planes have components that have not been hit
             alert("You don't have left bullets. Your score is 0.") //message
             resetGame() //gameover
-            return
         }
         else{
-            var turnsLeft=30-numberOfTurns //the var turnsLeft counts how many moves can the user make from this point forward
+            turnsLeft=30-numberOfTurns //the var turnsLeft counts how many moves can the user make from this point forward
             document.getElementById("turnsLeft").innerHTML="Turns left: ".concat(turnsLeft) //the variable turnsLeft is used to show a message that tells the user 
                                                                                             //how many moves can he make from this point forward
         }
     }
 
     //the function reinitialises the variables so that the second player can place his airplanes 
-    function secondPlayerTurn(){ 
+    function otherPlayerTurn(){ 
+        if(playerNumberTurn==1){
+            playerNumberTurn=2; //variable playerNumberTurn is 2 because now its the other player's turn
+        }
+        else{
+            playerNumberTurn=1; //variable playerNumberTurn is 1 because now its the other player's turn
+        }
         grid.innerHTML=""; //every div within the grid is deleted
-        playerNumberTurn=2; //variable playerNumberTurn is 2 because now its the second player's turn
         numberOfTurns=0; //the bullets the second player used is 0
         numberOfPlanes=0; //the number of planes the second player used is 0
         idAirPlanes=-1; //there are no airplane components so the ids will start from -1 
         show=true; //the show variable resets to default
-        shownInfo.innerHTML="" //the info section is reinitialised, this time for the second player
+        shownInfo.innerHTML="" //the info section is reinitialised, this time for the other player
     }
 
     //the function ends the game by deactivating every eventListener
@@ -461,18 +472,107 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
     //the function resets the game if it was player 1's turn and ends the game if it was player 2's turn
-    function resetGame(){
+    function oneRoundResetGame(){
         if(playerNumberTurn==1){ //if it was player 1's turn
-            var turnsLeft=30-numberOfTurns //the turnsLeft is the score of the first player
+            turnsLeft=30-numberOfTurns //the turnsLeft is the score of the first player
             document.getElementById("first-player-score").innerHTML="First Player: ".concat(turnsLeft) //the html is updated to show the first player's turn
-            secondPlayerTurn() //secondPlayer starts his turn
+            otherPlayerTurn() //secondPlayer starts his turn
             return
         }
         if(playerNumberTurn==2){ //if it was player 2's turn
-            var turnsLeft=30-numberOfTurns //the turnsLeft is the score of the second player
+            turnsLeft=30-numberOfTurns //the turnsLeft is the score of the second player
             document.getElementById("second-player-score").innerHTML="Second Player: ".concat(turnsLeft) //the html is updated to show the second player's turn
             gameOver()
             return
+        }
+    }
+
+    function threeRoundsResetGame(){
+        if(roundsPlayed==3){
+            gameOver()
+        }
+        else{
+            turnsLeft=30-numberOfTurns //the turnsLeft is the score of the second player
+            roundsPlayed++
+            if(playerNumberTurn==1){ //if it was player 1's turn
+                if(turnsLeft>0){
+                    player1Wins++
+                    document.getElementById("first-player-score").innerHTML="First Player: ".concat(player1Wins) //the html is updated to show the first player's turn
+                }
+                if(player1Wins>1){
+                    gameOver()
+                }
+                else{
+                    otherPlayerTurn() //secondPlayer starts his turn
+                }
+                return
+            }
+            if(playerNumberTurn==2){ //if it was player 2's turn
+                if(turnsLeft>0 ){
+                    player2Wins++
+                    document.getElementById("second-player-score").innerHTML="Second Player: ".concat(player2Wins) //the html is updated to show the second player's turn
+                }
+                if(player2Wins>1){
+                    gameOver()
+                }
+                else{
+                    otherPlayerTurn() //secondPlayer starts his turn
+                }
+                return
+            }
+        }
+    }
+
+    function fiveRoundsResetGame(){
+        if(roundsPlayed==5){
+            gameOver()
+        }
+        else{
+            roundsPlayed++
+            console.log(roundsPlayed)
+            turnsLeft=30-numberOfTurns //the turnsLeft is the score of the second player
+            if(playerNumberTurn==1){ //if it was player 1's turn
+                if(turnsLeft>0){
+                    player1Wins++
+                    document.getElementById("first-player-score").innerHTML="First Player: ".concat(player1Wins) //the html is updated to show the first player's turn
+                }
+                if(player1Wins>2){
+                    gameOver()
+                }
+                else{
+                    otherPlayerTurn() //secondPlayer starts his turn
+                }
+                return
+            }
+            if(playerNumberTurn==2){ //if it was player 2's turn
+                if(turnsLeft>0 ){
+                    player2Wins++
+                    document.getElementById("second-player-score").innerHTML="Second Player: ".concat(player2Wins) //the html is updated to show the second player's turn
+                }
+                if(player2Wins>2){
+                    gameOver()
+                }
+                else{
+                    otherPlayerTurn() //secondPlayer starts his turn
+                }
+                return
+            }
+            gameOver()
+        }
+    }
+
+    function resetGame(){
+        if(gameMode=="oneRound"){
+            oneRoundResetGame()
+            return
+        }
+        else if(gameMode=="bestOfThree"){
+            threeRoundsResetGame()
+            return 
+        }
+        else if(gameMode=="bestOfFive"){
+            fiveRoundsResetGame()
+            return 
         }
     }
 
